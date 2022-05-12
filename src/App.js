@@ -13,7 +13,10 @@ class App {
         // 로딩중
         this.setState({ data: null, loading: false })
         api.fetchCats(keyword)
-          .then(({ data }) => this.setState({data, loading: true}));
+          .then(({ data }) => this.setState({data, loading: true}))
+      },
+      onClick: () => {
+        api.randomCats().then(({data}) => this.setState({data, loading:true }))
       }
     });
 

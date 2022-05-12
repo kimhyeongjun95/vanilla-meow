@@ -16,6 +16,7 @@ class SearchResult {
   }
   
   setState(nextData) {
+    console.log(nextData);
     this.data = nextData.data;
     this.loading = nextData.loading;
     this.render();
@@ -23,8 +24,8 @@ class SearchResult {
   
   render() {
     if (this.loading) {
-      if (!this.loading.length) {
-        // 필수 검색 결과가 없는 경우, 유저가 불편함을 느끼지 않도록 UI적인 적절한 처리가 필요합니다.
+      if (!this.data.length) {
+        // 검색 결과가 없는 경우, 유저가 불편함을 느끼지 않도록 UI적인 적절한 처리가 필요합니다.
         this.$searchResult.innerHTML = `<h3>검색 결과가 없습니다.</h3>`
         return;
       }
@@ -45,7 +46,7 @@ class SearchResult {
           });
         });
       } else if (!this.loading && this.data === null) {
-      // 필수 데이터를 불러오는 중일 때, 현재 데이터를 불러오는 중임을 유저에게 알리는 UI를 추가해야 합니다.
+      // 데이터를 불러오는 중일 때, 현재 데이터를 불러오는 중임을 유저에게 알리는 UI를 추가해야 합니다.
       // 데이터를 불러오는 중, 현재 데이터를 불러오는 중
       this.$searchResult.innerHTML = `<h3>Loading...</h3>`
     } else if (!this.loading && this.data !== []) {
