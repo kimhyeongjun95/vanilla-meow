@@ -16,5 +16,8 @@ const api = {
   },
   randomCats: () => {
     return request(`${API_ENDPOINT}/api/cats/random50`)
+  },
+  fetchCatsById: (id) => {
+    return request(`${API_ENDPOINT}/api/cats/${id}`)
   }
 };
