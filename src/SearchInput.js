@@ -1,9 +1,12 @@
+import store from './storage.js'
+
 const TEMPLATE = '<input type="text">';
 
-class SearchInput {
+export default class SearchInput {
   constructor({ $target, onSearch, onClick }) {
     this.$target = $target;
-    
+    this.onSearch = onSearch;
+
     const $searchInput = document.createElement("input");
     this.$searchInput = $searchInput;
     this.$searchInput.placeholder = "고양이를 검색해보세요.";
@@ -28,6 +31,7 @@ class SearchInput {
           searchList.pop();
         }
         onSearch(e.target.value);
+        store.setItem(e.target.value);
         this.render();
       }
     });
@@ -42,12 +46,18 @@ class SearchInput {
 
   }
   render() {
-    this.recentSearches.innerHTML = this.searchList.map((item) => {
+    this.recentSearches.innerHTML = this.searchList.map((item, idx) => {
       return `
-        <div>
+        <div class="recent" data-recent-id=${idx}>
           <p>${item}</p>
         </div>
       `
     }).join('');
+
+    this.recentSearches.querySelectorAll('.recent').forEach((item, idx) => {
+      item.addEventListener('click', () => {
+        this.onSearch(this.recentSearches[idx])
+      })
+    })
   }
 }

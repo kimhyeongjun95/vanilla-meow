@@ -1,6 +1,10 @@
-console.log("app is running!");
+import SearchInput from './SearchInput.js'
+import SearchResult from './SearchResult.js'
+import ImageInfo from './ImageInfo.js'
+import store from './storage.js'
+import api from './api.js'
 
-class App {
+export default class App {
   $target = null;
   data = [];
 
@@ -41,11 +45,20 @@ class App {
         image: null
       }
     });
+
+    this.recentSearch();
   }
 
   setState(nextData) {
     console.log(this);
     this.data = nextData;
     this.searchResult.setState(nextData);
+  }
+
+  recentSearch() {
+    console.log(store.getItem())
+    if (store.getItem()) {
+      this.searchInput.onSearch(store.getItem());
+    }
   }
 }

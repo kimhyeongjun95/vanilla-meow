@@ -84,7 +84,13 @@ body * {
   width: 100%;
 }
 
-/* dark mode 처리
+@media (max-width:768px) {
+  .ImageInfo .content-wrapper {
+    width: 100%
+  }
+}
+
+/* dark mode 처리/
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #000;
